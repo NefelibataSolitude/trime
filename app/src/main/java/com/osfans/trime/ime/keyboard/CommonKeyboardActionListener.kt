@@ -297,6 +297,12 @@ class CommonKeyboardActionListener(
 
                     when (keyEventCode) {
                         KeyEvent.KEYCODE_BACK -> service.requestHideSelf(0)
+                        in KeyEvent.KEYCODE_NUMPAD_0..KeyEvent.KEYCODE_NUMPAD_9 -> {
+                        val primaryDigit = keyEventCode - KeyEvent.KEYCODE_NUMPAD_0 + KeyEvent.KEYCODE_0
+                        service.sendDownUpKeyEvent(primaryDigit, metaState)
+                    }
+
+                    else -> service.sendDownUpKeyEvent(keyEventCode, metaState)
                     }
                 }
             }
